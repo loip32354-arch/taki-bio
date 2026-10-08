@@ -3,7 +3,6 @@ import path from 'node:path';
 
 const root = process.cwd();
 const token = process.env.TELEGRAM_BOT_TOKEN;
-const expectedUsername = (process.env.TELEGRAM_USERNAME || 'Takigos').replace(/^@/, '').toLowerCase();
 const profilePath = path.join(root, 'data', 'telegram-profile.json');
 const assetsPath = path.join(root, 'assets');
 const tracksPath = path.join(assetsPath, 'tracks');
@@ -37,8 +36,8 @@ const download = async (fileId, destination) => {
 };
 
 const updates = await api('getUpdates', { allowed_updates: ['message'], timeout: 0 });
-const update = [...updates].reverse().find(({ message }) => message?.chat?.type === 'private' && message.from?.username?.toLowerCase() === expectedUsername);
-if (!update) throw new Error(`Open the bot from @${expectedUsername}, press Start, then run this workflow again.`);
+const update = [...updates].reverse().find(({ message }) => message?.chat?.type === 'private' && !message.from?.is_bot);
+if (!update) throw new Error('No personal message was found. Open the bot and send /start, then run this workflow again.');
 const userId = update.message.from.id;
 
 const [chat, photos, profileAudios] = await Promise.all([
@@ -80,7 +79,7 @@ for (const entry of await readdir(tracksPath)) {
 
 await writeFile(profilePath, `${JSON.stringify({
   name: [chat.first_name, chat.last_name].filter(Boolean).join(' ') || 'Taki',
-  username: chat.username ? `@${chat.username}` : `@${expectedUsername}`,
+  username: chat.username ? `@${chat.username}` : '@Takigos',
   bio: chat.bio || '',
   avatar,
   tracks

@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      TELEGRAM_USERNAME: Takigos
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
