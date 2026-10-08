@@ -1,7 +1,38 @@
 {
   "name": "Taki",
   "username": "@Takigos",
-  "bio": "Здесь появится твой текст «О себе» из профиля Telegram.",
-  "avatar": null,
-  "tracks": []
+  "bio": "У нас вич хаус о боже",
+  "avatar": "assets/telegram-avatar.jpg",
+  "tracks": [
+    {
+      "title": "ЗППП",
+      "artist": "CUPSIZE",
+      "duration": 149,
+      "src": "assets/tracks/AgADFpgAAr9tyUg.mp3"
+    },
+    {
+      "title": "вся моя жизнь говно",
+      "artist": "CUPSIZE",
+      "duration": 171,
+      "src": "assets/tracks/AgADbJ8AAsILyEg.mp3"
+    },
+    {
+      "title": "детская травма",
+      "artist": "CUPSIZE",
+      "duration": 133,
+      "src": "assets/tracks/AgADaZ8AAsILyEg.mp3"
+    },
+    {
+      "title": "прыгай, дура!",
+      "artist": "CUPSIZE",
+      "duration": 119,
+      "src": "assets/tracks/AgADs5IAAt5I2Uo.mp3"
+    },
+    {
+      "title": "17 ножевых",
+      "artist": "CUPSIZE",
+      "duration": 43,
+      "src": "assets/tracks/AgAD8ooAAqn5-Uk.mp3"
+    }
+  ]
 }
