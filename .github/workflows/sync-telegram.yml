@@ -19,11 +19,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: node scripts/sync-telegram.mjs
+      - name: Sync Telegram profile
+        id: telegram_sync
+        continue-on-error: true
+        run: node scripts/sync-telegram.mjs
       - name: Commit synchronized Telegram profile
+        if: steps.telegram_sync.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/telegram-profile.json assets
           git diff --cached --quiet || git commit -m "Sync Telegram profile"
           git push
+      - name: Explain first-run setup
+        if: steps.telegram_sync.outcome == 'failure'
+        run: |
+          echo "Telegram sync did not complete. Confirm that TELEGRAM_BOT_TOKEN is present and that @Takigos sent /start to this bot, then rerun this workflow."
