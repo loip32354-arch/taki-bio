@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   sync:
-    if: ${{ secrets.TELEGRAM_BOT_TOKEN != '' }}
     runs-on: ubuntu-latest
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
