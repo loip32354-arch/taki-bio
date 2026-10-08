@@ -1,0 +1,30 @@
+name: Sync Telegram profile
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ secrets.TELEGRAM_BOT_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_USERNAME: Takigos
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/sync-telegram.mjs
+      - name: Commit synchronized Telegram profile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/telegram-profile.json assets
+          git diff --cached --quiet || git commit -m "Sync Telegram profile"
+          git push

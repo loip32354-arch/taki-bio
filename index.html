@@ -22,8 +22,8 @@
     .profile { display:flex; flex-direction:column; align-items:flex-start; }
     .avatar { width:132px; height:132px; border:1px solid rgba(240,230,255,.34); border-radius:42px; display:grid; place-items:center; position:relative; overflow:hidden; background:linear-gradient(145deg,#b99bff,#50288e 57%,#211137); box-shadow:0 18px 38px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.25); }
     .avatar span { font-size:38px;font-weight:800;letter-spacing:-3px; transform:translateX(-2px); }
-    .avatar:after { content:""; width:80px;height:80px; position:absolute; right:-34px;top:-26px; border-radius:50%; background:rgba(255,255,255,.28); filter:blur(4px); }
-    .online { position:absolute; width:18px;height:18px;right:10px;bottom:10px; border-radius:50%; background:#b9ff78;border:3px solid #4d2b83; }
+    .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}.avatar.has-image span,.avatar.has-image:after{opacity:0}.avatar:after { content:""; width:80px;height:80px; position:absolute; right:-34px;top:-26px; border-radius:50%; background:rgba(255,255,255,.28); filter:blur(4px); transition:opacity .2s; }
+    .online { position:absolute;z-index:3; width:18px;height:18px;right:10px;bottom:10px; border-radius:50%; background:#b9ff78;border:3px solid #4d2b83; }
     h1 { font-size:34px;line-height:1.12;letter-spacing:-1.7px;margin:24px 0 8px; }
     .username { margin:0;color:var(--muted);font-size:14px; }
     .right { align-self:stretch;display:flex;flex-direction:column;justify-content:center; }
@@ -38,7 +38,7 @@
     .music-toggle:hover { transform:translateY(-2px);background:#bf9cff; }.note { font-size:17px; }
     .modal-layer { position:absolute;inset:0;display:grid;place-items:center;z-index:3;border-radius:31px;background:rgba(5,3,12,.57);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.25s ease; }
     .modal-layer.show { opacity:1;pointer-events:auto; }.playlist { width:min(348px,calc(100% - 38px));padding:16px;border:1px solid rgba(217,195,255,.28);border-radius:22px;background:linear-gradient(145deg,rgba(35,23,62,.98),rgba(15,10,29,.98));box-shadow:0 22px 58px rgba(0,0,0,.53),0 0 35px rgba(155,91,255,.16);transform:translateY(12px) scale(.97);transition:.25s ease; }
-    .modal-layer.show .playlist { transform:none; }.playlist-head { padding:4px 6px 11px;color:#d7c5ff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px; }.playlist-top{display:flex;justify-content:space-between;align-items:center}.close{width:28px;height:28px;border:0;border-radius:9px;background:rgba(188,151,255,.12);color:#e6d9ff;font-size:20px;line-height:1;cursor:pointer}.close:hover{background:rgba(188,151,255,.24)}.track { width:100%;border:0;padding:11px 7px;display:flex;align-items:center;gap:10px;border-radius:11px;background:transparent;color:inherit;text-align:left;font-family:inherit;cursor:pointer; }.track:hover,.track.playing{background:rgba(164,115,255,.12)}.play{width:27px;height:27px;flex:none;border-radius:9px;display:grid;place-items:center;background:rgba(178,135,255,.18);color:#d3baff;font-size:10px}.track.playing .play{background:#af80ff;color:#211039;box-shadow:0 0 16px rgba(174,128,255,.48)}.track b{font-size:12px;display:block}.track span{font-size:10px;color:var(--muted)}.audio-note{margin:4px 7px 1px;color:#a99ac5;font-size:10px}
+    .modal-layer.show .playlist { transform:none; }.playlist-head { padding:4px 6px 11px;color:#d7c5ff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px; }.playlist-top{display:flex;justify-content:space-between;align-items:center}.close{width:28px;height:28px;border:0;border-radius:9px;background:rgba(188,151,255,.12);color:#e6d9ff;font-size:20px;line-height:1;cursor:pointer}.close:hover{background:rgba(188,151,255,.24)}.track { width:100%;border:0;padding:11px 7px;display:flex;align-items:center;gap:10px;border-radius:11px;background:transparent;color:inherit;text-align:left;font-family:inherit;cursor:pointer; }.track:hover,.track.playing{background:rgba(164,115,255,.12)}.track:disabled{cursor:default;opacity:.62}.play{width:27px;height:27px;flex:none;border-radius:9px;display:grid;place-items:center;background:rgba(178,135,255,.18);color:#d3baff;font-size:10px}.track.playing .play{background:#af80ff;color:#211039;box-shadow:0 0 16px rgba(174,128,255,.48)}.track b{font-size:12px;display:block}.track span{font-size:10px;color:var(--muted)}.audio-note{margin:4px 7px 1px;color:#a99ac5;font-size:10px}
     @media(max-width:680px){ body{min-height:100dvh;padding:16px 0;place-items:center}.shell{width:calc(100% - 24px);min-height:0}.card{min-height:0;padding:30px 22px 96px;grid-template-columns:1fr;gap:25px}.avatar{width:96px;height:96px;border-radius:29px}h1{font-size:29px;margin:16px 0 5px}.right{justify-content:start}.eyebrow{margin-bottom:9px}h2{font-size:20px;margin-bottom:17px}.links{gap:9px}.link{min-height:58px;padding:11px 12px}.icon{width:32px;height:32px}.music-toggle{left:22px;bottom:26px;min-height:45px;padding:11px 14px}.modal-layer{border-radius:31px}.playlist{width:calc(100% - 32px);padding:15px}.track{min-height:53px;padding:10px 7px}.close{width:38px;height:38px;font-size:25px}.audio-note{font-size:10px} }
     @media(max-width:380px){ body{place-items:start center}.card{padding:25px 18px 89px;gap:20px}.avatar{width:82px;height:82px;border-radius:25px}.avatar span{font-size:31px}h1{font-size:26px}h2{font-size:18px}.music-toggle{left:18px;bottom:22px}.playlist{width:calc(100% - 24px)} }
   </style>
@@ -47,12 +47,12 @@
   <main class="shell">
     <section class="card">
       <div class="profile">
-        <div class="avatar" aria-label="Место для Telegram-аватарки"><span>тв</span><i class="online"></i></div>
-        <h1>Taki</h1>
-        <p class="username">@Takigos</p>
+        <div class="avatar" id="profileAvatar" aria-label="Telegram-аватарка"><img id="avatarImage" alt="" hidden><span id="avatarInitials">ТВ</span><i class="online"></i></div>
+        <h1 id="profileName">Taki</h1>
+        <p class="username" id="profileUsername">@Takigos</p>
       </div>
       <div class="right">
-        <h2>Здесь появится твой текст «О себе» из профиля Telegram.</h2>
+        <h2 id="profileBio">Здесь появится твой текст «О себе» из профиля Telegram.</h2>
         <nav class="links" aria-label="Социальные сети">
           <a class="link" href="https://www.tiktok.com/@takigos" target="_blank" rel="noopener"><span class="icon">♪</span><div><strong>TikTok</strong><small>@takigos</small></div><span class="arrow">↗</span></a>
           <a class="link" href="https://t.me/Takigos" target="_blank" rel="noopener"><span class="icon">✈</span><div><strong>Telegram</strong><small>написать мне</small></div><span class="arrow">↗</span></a>
@@ -64,23 +64,25 @@
     <div class="modal-layer" id="modalLayer" aria-hidden="true">
       <div class="playlist" id="playlist" role="dialog" aria-modal="true" aria-label="Любимые треки">
         <div class="playlist-top"><div class="playlist-head">сейчас в профиле</div><button class="close" id="closePlaylist" aria-label="Закрыть">×</button></div>
-        <button class="track" data-notes="[261.63,329.63,392,523.25]" aria-label="Воспроизвести Название трека"><i class="play">▶</i><div><b>Название трека</b><span>исполнитель</span></div></button>
-        <button class="track" data-notes="[293.66,369.99,440,587.33]" aria-label="Воспроизвести Ещё один трек"><i class="play">▶</i><div><b>Ещё один трек</b><span>исполнитель</span></div></button>
-        <button class="track" data-notes="[220,277.18,329.63,440]" aria-label="Воспроизвести Твой вайб"><i class="play">▶</i><div><b>Твой вайб</b><span>исполнитель</span></div></button>
-        <p class="audio-note">Демо-плеер · треки появятся после подключения Telegram</p>
+        <div id="trackList"></div>
+        <p class="audio-note" id="audioNote">Треки появятся после первой синхронизации Telegram.</p>
+        <audio id="audioPlayer" preload="metadata"></audio>
       </div>
     </div>
   </main>
   <script>
-    const button=document.getElementById('musicToggle'), layer=document.getElementById('modalLayer'), close=document.getElementById('closePlaylist');
-    let audioContext, timer, activeTrack;
-    const stopTrack=()=>{clearInterval(timer);document.querySelectorAll('.track').forEach(track=>{track.classList.remove('playing');track.querySelector('.play').textContent='▶'});activeTrack=null;};
-    const playTrack=(track)=>{if(activeTrack===track){stopTrack();return;}stopTrack();audioContext??=new (window.AudioContext||window.webkitAudioContext)();const notes=JSON.parse(track.dataset.notes);let step=0;const pulse=()=>{const osc=audioContext.createOscillator(), gain=audioContext.createGain();osc.type='sine';osc.frequency.value=notes[step++%notes.length];gain.gain.setValueAtTime(.045,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.32);osc.connect(gain).connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+.34);};pulse();timer=setInterval(pulse,420);activeTrack=track;track.classList.add('playing');track.querySelector('.play').textContent='Ⅱ';};
+    const button=document.getElementById('musicToggle'), layer=document.getElementById('modalLayer'), close=document.getElementById('closePlaylist'), audioPlayer=document.getElementById('audioPlayer'), trackList=document.getElementById('trackList'), audioNote=document.getElementById('audioNote');
+    let activeTrack;
+    const stopTrack=()=>{audioPlayer.pause();audioPlayer.removeAttribute('src');audioPlayer.load();document.querySelectorAll('.track').forEach(track=>{track.classList.remove('playing');track.querySelector('.play').textContent='▶'});activeTrack=null;};
+    const playTrack=async(track)=>{if(!track.dataset.src)return;if(activeTrack===track){stopTrack();return;}stopTrack();audioPlayer.src=track.dataset.src;try{await audioPlayer.play();activeTrack=track;track.classList.add('playing');track.querySelector('.play').textContent='Ⅱ'}catch{audioNote.textContent='Не удалось начать воспроизведение. Попробуй ещё раз.'}};
+    const formatDuration=(seconds)=>{if(!seconds)return '';const minutes=Math.floor(seconds/60),rest=String(seconds%60).padStart(2,'0');return `${minutes}:${rest}`};
+    const renderTracks=(tracks)=>{trackList.replaceChildren();if(!tracks.length){audioNote.textContent='В Telegram пока нет опубликованных треков.';return}tracks.forEach(track=>{const item=document.createElement('button');item.type='button';item.className='track';item.dataset.src=track.src||'';item.disabled=!track.src;item.setAttribute('aria-label',`${track.src?'Воспроизвести':'Недоступен'} ${track.title}`);item.innerHTML=`<i class="play">▶</i><div><b>${track.title}</b><span>${track.artist||'Telegram'}${track.duration?` · ${formatDuration(track.duration)}`:''}</span></div>`;item.addEventListener('click',()=>playTrack(item));trackList.append(item)});audioNote.textContent=tracks.every(track=>track.src)?'Треки из Telegram':'Часть треков больше 20 МБ и доступна только в Telegram.'};
     const setModal=(open)=>{layer.classList.toggle('show',open);button.setAttribute('aria-expanded',open);layer.setAttribute('aria-hidden',!open);if(open)close.focus()};
     button.addEventListener('click',()=>setModal(true)); close.addEventListener('click',()=>{stopTrack();setModal(false)});
     layer.addEventListener('click',(event)=>{if(event.target===layer){stopTrack();setModal(false)}});
     document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){stopTrack();setModal(false)}});
-    document.querySelectorAll('.track').forEach(track=>track.addEventListener('click',()=>playTrack(track)));
+    audioPlayer.addEventListener('ended',stopTrack);
+    fetch('./data/telegram-profile.json',{cache:'no-store'}).then(response=>response.ok?response.json():Promise.reject()).then(profile=>{const name=profile.name||'Taki',username=profile.username||'@Takigos';document.getElementById('profileName').textContent=name;document.getElementById('profileUsername').textContent=username;document.getElementById('profileBio').textContent=profile.bio||'Здесь появится твой текст «О себе» из профиля Telegram.';document.getElementById('avatarInitials').textContent=name.slice(0,2).toUpperCase();if(profile.avatar){const avatar=document.getElementById('profileAvatar'),image=document.getElementById('avatarImage');image.src=profile.avatar;image.hidden=false;avatar.classList.add('has-image')}renderTracks(profile.tracks||[])}).catch(()=>renderTracks([]));
   </script>
 </body>
 </html>
