@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = process.cwd();
@@ -21,10 +21,6 @@ const api = async (method, parameters = {}) => {
   return result.result;
 };
 
-const readProfile = async () => {
-  try { return JSON.parse(await readFile(profilePath, 'utf8')); } catch { return {}; }
-};
-
 const extensionFor = (fileName = '', mimeType = '') => {
   const extension = path.extname(fileName).toLowerCase();
   if (['.mp3', '.m4a', '.ogg', '.wav', '.aac'].includes(extension)) return extension;
@@ -40,15 +36,10 @@ const download = async (fileId, destination) => {
   return file.file_path;
 };
 
-const profile = await readProfile();
-let userId = profile.telegramUserId;
-
-if (!userId) {
-  const updates = await api('getUpdates', { allowed_updates: ['message'], timeout: 0 });
-  const update = [...updates].reverse().find(({ message }) => message?.chat?.type === 'private' && message.from?.username?.toLowerCase() === expectedUsername);
-  if (!update) throw new Error(`Open the bot from @${expectedUsername}, press Start, then run this workflow again.`);
-  userId = update.message.from.id;
-}
+const updates = await api('getUpdates', { allowed_updates: ['message'], timeout: 0 });
+const update = [...updates].reverse().find(({ message }) => message?.chat?.type === 'private' && message.from?.username?.toLowerCase() === expectedUsername);
+if (!update) throw new Error(`Open the bot from @${expectedUsername}, press Start, then run this workflow again.`);
+const userId = update.message.from.id;
 
 const [chat, photos, profileAudios] = await Promise.all([
   api('getChat', { chat_id: userId }),
@@ -88,7 +79,6 @@ for (const entry of await readdir(tracksPath)) {
 }
 
 await writeFile(profilePath, `${JSON.stringify({
-  telegramUserId: userId,
   name: [chat.first_name, chat.last_name].filter(Boolean).join(' ') || 'Taki',
   username: chat.username ? `@${chat.username}` : `@${expectedUsername}`,
   bio: chat.bio || '',
